@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Intake</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <h2>Data de hoje: {{ current_date }}</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label for="user">Usuário:</label>
+      <select id="user" name="user" required>
+        {% for entry in data %}
+        <option value="{{ entry.user.id }}">{{ entry.user.name }}</option>
+        {% endfor %}
+      </select>
+      <label for="amount">Quantidade em ml:</label>
+      <input type="number" id="amount" name="amount" required />
+      <button type="submit">Consumir</button>
+    </form>
+    <div>
+      {% for entry in data %}
+      <h3>{{ entry.user.name }}</h3>
+      <p>Meta do dia: {{ entry.goal }} ml</p>
+      <p>Meta restante: {{ entry.remaining }} ml</p>
+      <p>Meta já consumida: {{ entry.total_intake }} ml</p>
+      <p>Meta já consumida (%): {{ entry.percentage|floatformat:2 }}%</p>
+      <p>Chegou na meta? {{ entry.reached_goal }}</p>
+      <p>Quantos mls Tomou? {{ entry.total_intake }} ml</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>

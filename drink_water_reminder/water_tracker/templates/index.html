@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drink Water Reminder</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to Drink Water Reminder</h1>
+    <a href="{% url 'register' %}">Register</a>
+    <a href="{% url 'daily' %}">Daily Intake</a>
+    <a href="{% url 'history' %}">History</a>
+  </body>
+</html>
